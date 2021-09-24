@@ -7,4 +7,3 @@
 数据库中有<br>
 用户表、订单表、订单项表、产品表、产品图片表、属性值表、评价表、分类表、属性表、管理者表<br>
 ![image](https://github.com/xcw233/tmall/blob/master/tableRelationship.png)
-
