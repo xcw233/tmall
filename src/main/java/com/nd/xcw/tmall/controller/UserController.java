@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
  
-    @RequestMapping("admin_user_list")
+    @RequestMapping("admin_users")
     public String list(Model model, Page page){
         PageHelper.offsetPage(page.getStart(),page.getCount());
 

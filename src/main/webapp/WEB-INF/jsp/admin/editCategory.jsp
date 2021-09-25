@@ -26,14 +26,15 @@
 <div class="workingArea">
 
 	<ol class="breadcrumb">
-		<li><a href="admin_category_list">所有分类</a></li>
+		<li><a href="${contextPath}/admin_categories">所有分类</a></li>
 		<li class="active">编辑分类</li>
 	</ol>
 
 	<div class="panel panel-warning editDiv">
 		<div class="panel-heading">编辑分类</div>
 		<div class="panel-body">
-			<form method="post" id="editForm" action="admin_category_update"  enctype="multipart/form-data">
+			<form method="post" id="editForm" action="${contextPath}/admin_categories"  enctype="multipart/form-data">
+				<input type="hidden" name="_method" value="PUT">
 				<table class="editTable">
 					<tr>
 						<td>分类名称</td>

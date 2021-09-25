@@ -47,7 +47,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
             if(null == manager)
             {
-                response.sendRedirect("managerLoginPage");
+                response.sendRedirect(contextPath+"/managerLoginPage");
                 return false;
             }
         }

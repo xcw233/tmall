@@ -11,6 +11,7 @@ import com.nd.xcw.tmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.pagehelper.PageHelper;
@@ -24,7 +25,7 @@ public class OrderController {
     @Autowired
     OrderItemService orderItemService;
 
-    @RequestMapping("admin_order_list")
+    @GetMapping("admin_orders")
     public String list(Model model, Page page){
         PageHelper.offsetPage(page.getStart(),page.getCount());
 
@@ -46,6 +47,6 @@ public class OrderController {
         o.setDeliveryDate(new Date());
         o.setStatus(OrderService.waitConfirm);
         orderService.update(o);
-        return "redirect:admin_order_list";
+        return "redirect:admin_orders";
     }
 }

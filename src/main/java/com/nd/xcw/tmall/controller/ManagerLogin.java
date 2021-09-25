@@ -30,7 +30,7 @@ public class ManagerLogin {
         }
 
         session.setAttribute("manager",manager);
-        return "redirect:admin_category_list";
+        return "redirect:admin_categories";
     }
 
     @RequestMapping("/managerLogout")

@@ -10,7 +10,7 @@ import com.nd.xcw.tmall.util.UploadedImageFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -26,7 +26,7 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
   
-    @RequestMapping("admin_category_list")
+    @GetMapping("admin_categories")
     public String list(Model model, Page page){
         PageHelper.offsetPage(page.getStart(), page.getCount(),"id desc");
         List<Category> cs= categoryService.list();
@@ -37,7 +37,7 @@ public class CategoryController {
         return "admin/listCategory";
     }
 
-    @RequestMapping("admin_category_add")
+    @PostMapping("admin_categories")
     public String add(Category c, HttpSession session, UploadedImageFile uploadedImageFile) throws IOException {
         categoryService.add(c);
         File  imageFolder= new File(session.getServletContext().getRealPath("img/category"));
@@ -47,28 +47,28 @@ public class CategoryController {
         uploadedImageFile.getImage().transferTo(file);
         BufferedImage img = ImageUtil.change2jpg(file);
         ImageIO.write(img, "jpg", file);
-        return "redirect:/admin_category_list";
+        return "redirect:/admin_categories";
     }
 
-    @RequestMapping("admin_category_delete")
-    public String delete(int id,HttpSession session) throws IOException {
+    @DeleteMapping("admin_categories/{id}")
+    public String delete(@PathVariable("id") int id,HttpSession session) throws IOException {
         categoryService.delete(id);
 
         File  imageFolder= new File(session.getServletContext().getRealPath("img/category"));
         File file = new File(imageFolder,id+".jpg");
         file.delete();
 
-        return "redirect:/admin_category_list";
+        return "redirect:/admin_categories";
     }
 
-    @RequestMapping("admin_category_edit")
-    public String edit(int id,Model model) throws IOException {
+    @GetMapping("admin_categories/{id}")
+    public String edit(@PathVariable("id") int id,Model model) throws IOException {
         Category c= categoryService.get(id);
         model.addAttribute("c", c);
         return "admin/editCategory";
     }
 
-    @RequestMapping("admin_category_update")
+    @PutMapping("admin_categories")
     public String update(Category c, HttpSession session, UploadedImageFile uploadedImageFile) throws IOException {
         categoryService.update(c);
         MultipartFile image = uploadedImageFile.getImage();
@@ -79,7 +79,6 @@ public class CategoryController {
             BufferedImage img = ImageUtil.change2jpg(file);
             ImageIO.write(img, "jpg", file);
         }
-        return "redirect:/admin_category_list";
+        return "redirect:/admin_categories";
     }
-
 }

@@ -10,15 +10,16 @@
 
 <div class="workingArea">
 	<ol class="breadcrumb">
-		<li><a href="admin_category_list">所有分类</a></li>
-		<li><a href="admin_property_list?cid=${p.category.id}">${p.category.name}</a></li>
+		<li><a href="${contextPath}/admin_categories">所有分类</a></li>
+		<li><a href="${contextPath}/admin_properties/${p.category.id}">${p.category.name}</a></li>
 		<li class="active">编辑属性</li>
 	</ol>
 
 	<div class="panel panel-warning editDiv">
 		<div class="panel-heading">编辑属性</div>
 		<div class="panel-body">
-			<form method="post" id="editForm" action="admin_property_update">
+			<form method="post" id="editForm" action="${contextPath}/admin_properties">
+				<input type="hidden" name="_method" value="PUT">
 				<table class="editTable">
 					<tr>
 						<td>属性名称</td>

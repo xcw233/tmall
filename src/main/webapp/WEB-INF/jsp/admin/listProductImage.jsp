@@ -14,11 +14,18 @@
             }
             return false;
         });
+
         $(".addFormDetail").submit(function(){
             if(checkEmpty("filepathDetail","图片文件"))
                 return true;
             return false;
         });
+
+		$(".delete").click(function(){
+			var href=$(this).attr("href");
+			$("#formdelete").attr("action",href).submit();
+			return false;
+		});
     });
 
 </script>
@@ -28,8 +35,8 @@
 
 <div class="workingArea">
 	<ol class="breadcrumb">
-		<li><a href="admin_category_list">所有分类</a></li>
-		<li><a href="admin_product_list?cid=${p.category.id}">${p.category.name}</a></li>
+		<li><a href="${contextPath}/admin_categories">所有分类</a></li>
+		<li><a href="${contextPath}/admin_products/${p.category.id}">${p.category.name}</a></li>
 		<li class="active">${p.name}</li>
 		<li class="active">产品图片管理</li>
 	</ol>
@@ -41,7 +48,7 @@
 					<div class="panel panel-warning addPictureDiv">
 						<div class="panel-heading">新增产品<b class="text-primary"> 单个 </b>图片</div>
 						<div class="panel-body">
-							<form method="post" class="addFormSingle" action="admin_productImage_add" enctype="multipart/form-data">
+							<form method="post" class="addFormSingle" action="${contextPath}/admin_productImages" enctype="multipart/form-data">
 								<table class="addTable">
 									<tr>
 										<td>请选择本地图片 尺寸400X400 为佳</td>
@@ -75,12 +82,11 @@
 							<tr>
 								<td>${pi.id}</td>
 								<td>
-									<a title="点击查看原图" href="img/productSingle/${pi.id}.jpg"><img height="50px" src="img/productSingle/${pi.id}.jpg"></a>
+									<a title="点击查看原图" href="${contextPath}/img/productSingle/${pi.id}.jpg"><img height="50px" src="${contextPath}/img/productSingle/${pi.id}.jpg"></a>
 								</td>
-								<td><a deleteLink="true"
-									   href="admin_productImage_delete?id=${pi.id}"><span
-										class=" 	glyphicon glyphicon-trash"></span></a></td>
-
+								<td><a class="delete" deleteLink="true"
+									   href="${contextPath}/admin_productImages/${pi.id}"><span
+										class="glyphicon glyphicon-trash"></span></a></td>
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -94,7 +100,7 @@
 					<div class="panel panel-warning addPictureDiv">
 						<div class="panel-heading">新增产品<b class="text-primary"> 详情 </b>图片</div>
 						<div class="panel-body">
-							<form method="post" class="addFormDetail" action="admin_productImage_add" enctype="multipart/form-data">
+							<form method="post" class="addFormDetail" action="${contextPath}/admin_productImages" enctype="multipart/form-data">
 								<table class="addTable">
 									<tr>
 										<td>请选择本地图片 宽度790  为佳</td>
@@ -128,11 +134,11 @@
 							<tr>
 								<td>${pi.id}</td>
 								<td>
-									<a title="点击查看原图" href="img/productDetail/${pi.id}.jpg"><img height="50px" src="img/productDetail/${pi.id}.jpg"></a>
+									<a title="点击查看原图" href="${contextPath}/img/productDetail/${pi.id}.jpg"><img height="50px" src="${contextPath}/img/productDetail/${pi.id}.jpg"></a>
 								</td>
-								<td><a deleteLink="true"
-									   href="admin_productImage_delete?id=${pi.id}"><span
-										class=" 	glyphicon glyphicon-trash"></span></a></td>
+								<td><a class="delete" deleteLink="true"
+									   href="${contextPath}/admin_productImages/${pi.id}"><span
+										class="glyphicon glyphicon-trash"></span></a></td>
 
 							</tr>
 						</c:forEach>
@@ -142,11 +148,9 @@
 			</td>
 		</tr>
 	</table>
-
-
-
-
-
+	<form id="formdelete" action="" method="POST">
+		<input type="hidden" name="_method" value="DELETE">
+	</form>
 </div>
 
 <%@include file="../include/admin/adminFooter.jsp"%>

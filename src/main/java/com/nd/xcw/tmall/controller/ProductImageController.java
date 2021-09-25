@@ -17,8 +17,7 @@ import com.nd.xcw.tmall.util.UploadedImageFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -31,7 +30,7 @@ public class ProductImageController {
     ProductImageService productImageService;
 
 
-    @RequestMapping("admin_productImage_add")
+    @PostMapping("admin_productImages")
     public String add(ProductImage pi, HttpSession session, UploadedImageFile uploadedImageFile) {
         productImageService.add(pi);
         String fileName = pi.getId()+ ".jpg";
@@ -65,11 +64,11 @@ public class ProductImageController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:admin_productImage_list?pid="+pi.getPid();
+        return "redirect:/admin_productImages/"+pi.getPid();
     }
 
-    @RequestMapping("admin_productImage_delete")
-    public String delete(int id,HttpSession session) {
+    @DeleteMapping("admin_productImages/{id}")
+    public String delete(@PathVariable("id") int id, HttpSession session) {
         ProductImage pi = productImageService.get(id);
 
         String fileName = pi.getId()+ ".jpg";
@@ -99,11 +98,11 @@ public class ProductImageController {
         productImageService.delete(id);
 
 
-        return "redirect:admin_productImage_list?pid="+pi.getPid();
+        return "redirect:/admin_productImages/"+pi.getPid();
     }
 
-    @RequestMapping("admin_productImage_list")
-    public String list(int pid, Model model) {
+    @GetMapping("admin_productImages/{pid}")
+    public String list(@PathVariable("pid") int pid, Model model) {
         Product p =productService.get(pid);
         List<ProductImage> pisSingle = productImageService.list(pid, ProductImageService.type_single);
         List<ProductImage> pisDetail = productImageService.list(pid, ProductImageService.type_detail);
