@@ -1,5 +1,7 @@
 # tmall
+
 [toc]
+
 ## 简介
 这是一个购物商城项目<br>
 后台技术使用的是SpringBoot，前端使用的是jsp;<br>
@@ -14,21 +16,21 @@
 ## 下载运行
 从IDEA 上clone 项目到本地
 **环境**
-mysql 5.x
-jdk 8
+mysql 5.x<br>
+jdk 8<br>
 **在application.properties中修改mysql的配置**
 > MySQL数据库配置
 
-spring.datasource.url=jdbc:mysql://127.0.0.1:3306/*****?characterEncoding=UTF-8
-spring.datasource.username=root
-spring.datasource.password=*****
-spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-将tmall.sql导入到自己的数据库中
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/*****?characterEncoding=UTF-8<br>
+spring.datasource.username=root<br>
+spring.datasource.password=*****<br>
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver<br>
+将tmall.sql导入到自己的数据库中<br>
 
 **启动**
-前端访问 localhost:8081/test/
-后台访问 localhost:8081/test/admin
+前端访问 localhost:8081/test/<br>
+后台访问 localhost:8081/test/admin<br>
 
 **登入问题**
-前端可以注册然后进行登入，后台也会有数据查看即可
+前端可以注册然后进行登入，后台也会有数据查看即可<br>
 后台账号数据请到数据库中查看
