@@ -14,7 +14,7 @@
 **2.0** 版本有一个完整的业务流程 稳定运行 基础前端业务线，后台各表CRUD<br>
 **2.1** 版本支持RestFul风格<br>
 ## 下载运行
-从IDEA 上clone 项目到本地
+从IDEA 上clone 项目到本地<br>
 **环境**
 mysql 5.x<br>
 jdk 8<br>
